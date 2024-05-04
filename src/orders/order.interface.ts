@@ -21,4 +21,15 @@ export interface Order {
     IDLE = 'IDLE',
     PROCESSING = 'PROCESSING',
   }
+
+  export interface OrderResponse {
+    status: 'success' | 'error';
+    statusCode: number;
+    error?: string;
+    order?: Order;
+    bot?: Bot;
+    orders?: Order[];
+    bots?:  Bot[];
+    message?: string;
+  }
   
