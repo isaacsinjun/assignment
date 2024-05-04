@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Delete, Param, Query } from '@nestjs/common';
+import { Controller, Post, Get, Delete, Param, Query, Render } from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { Order, Bot, OrderResponse } from './order.interface';
 
@@ -15,7 +15,7 @@ export class OrdersController {
       }
       
       const order = this.orderService.createOrder(memberType as 'normal' | 'vip');
-      const response: OrderResponse = { status: 'success', statusCode: 200, order, message: 'Order created successfully' };
+      const response: OrderResponse = order;
       //console.log('Response:', response);
       return response;
     } catch (error) {
@@ -28,33 +28,25 @@ export class OrdersController {
   @Get('')
   getAllOrders(): OrderResponse {
     const orders = this.orderService.getAllOrders();
-    const response: OrderResponse = { status: 'success', statusCode: 200, orders };
-    //console.log('Response:', response);
-    return response;
+    return orders;
   }
 
   @Get('bots')
   getBots(): OrderResponse {
     const bots = this.orderService.getBots();
-    const response: OrderResponse = { status: 'success', statusCode: 200, bots };
-    //console.log('Response:', response);
-    return response;
+    return bots;
   }
 
   @Post('bots')
   addBot(): OrderResponse {
     const bot = this.orderService.addBot();
-    const response: OrderResponse = { status: 'success', statusCode: 201, bot, message: 'Bot added successfully' };
-    //console.log('Response:', response);
-    return response;
+    return bot;
   }
 
   @Delete('bots')
   removeBot(): OrderResponse {
     const bot = this.orderService.removeBot();
-    const response: OrderResponse = { status: 'success', statusCode: 200, bot, message: 'Bot removed successfully' };
-    //console.log('Response:', response);
-    return response;
+    return bot;
   }
 
   @Delete('')
